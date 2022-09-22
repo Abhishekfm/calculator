@@ -8,7 +8,6 @@ let flag = 1;
 let twoOperator = 0;
 let tap = 0;
 
-console.log(allBtn);
 allBtn.forEach((ele)=>{
     // console.log(ele.innerHTML);
     // if(ele.innerText === ""){
@@ -93,7 +92,7 @@ function addInTyping(ele){
                 input = [];
                 input_solve = [];
                 input.push(ans);
-                input_solve.push(ans);
+                input_solve.push(ans+"");
                 twoOperator = 0;
                 tap = 0;
                 result.innerText = 0;
@@ -119,6 +118,27 @@ function addInTyping(ele){
             input.pop();
             let make = input_solve.join(" ");
             typing.value = make;
+            break;
+        case '.':
+            twoOperator = 0;
+            if(input.length >= 1){
+                if(typeof(input[input.length-1]) === typeof(1)){
+                    if(input_solve.length >= 1){
+                        input_solve[input_solve.length-1] = input_solve[input_solve.length-1] + '.';
+                    }else{
+                        input_solve.push('0.');
+                    }
+                       typing.value += '.';
+                }else{
+                    input_solve.push('0.');            
+                    typing.value += ' 0.';
+                }
+                input.push(0);
+                break;
+            }
+            typing.value += '.';
+            input_solve.push('0.');
+            input.push(0);
             break;
         case '1':
             twoOperator = 0;
@@ -311,6 +331,51 @@ function addInTyping(ele){
             input_solve.push('9');
             input.push(9);
             break;
+        case '00':
+            twoOperator = 0;
+            if(input.length >= 1){
+                if(typeof(input[input.length-1]) === typeof(1)){
+                    if(input_solve.length >= 1){
+                        input_solve[input_solve.length-1] = input_solve[input_solve.length-1] + '00';
+                    }else{
+                        input_solve.push('00');
+                    }
+                    typing.value += '00';
+                }else{
+                    typing.value += ' 00';
+                    input_solve.push('00');
+                }
+                input.push(0);
+                input.push(0);
+                break;
+            }
+            typing.value += '00';
+            input_solve.push('00');
+            input.push(0);
+            input.push(0);
+            break;
+        case '0':
+            twoOperator = 0;
+            console.log(input_solve);
+            if(input.length >= 1){
+                if(typeof(input[input.length-1]) === typeof(1)){
+                    if(input_solve.length >= 1){
+                        input_solve[input_solve.length-1] = input_solve[input_solve.length-1] + '0';
+                    }else{
+                        input_solve.push('0');
+                    }
+                    typing.value += '0';
+                }else{
+                    typing.value += ' 0';
+                    input_solve.push('0');
+                }
+                input.push(0);
+                break;
+            }
+            typing.value += '0';
+            input_solve.push('0');
+            input.push(0);
+            break;
         default:
             break;
     }
@@ -319,7 +384,6 @@ function addInTyping(ele){
 
 
 function solve(){
-    console.log(input_solve);
     input_solve = input_solve.join(" ").replace('X','*');
     return eval(input_solve);
 }
