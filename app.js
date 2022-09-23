@@ -88,7 +88,7 @@ function addInTyping(ele){
             }
             tap += 1;
             if(tap == 2){
-                typing.value = ans;
+                typing.value = ans + "";
                 input = [];
                 input_solve = [];
                 input.push(ans);
